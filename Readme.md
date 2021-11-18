@@ -3,6 +3,18 @@ Calculator
 This is a project for The Odin Project's foundation course. My intention for the project is to refine and demonstrate my knowledge of HTML, CSS, and Javascript.
 
 -----------
+Version 1.0
+-----------
+
+The calculator now functions accordingly, including with negative numbers.
+
+Upadates: 
+
+- Numerous bug fixes including division operation, proper storage after pressing equal, stringed operations.
+- Added an animation for button hovering and pressing.
+- Added a second display above what is currently being enter that shows the previous value entered and operator, or total if equals was pressed.
+
+-----------
 Version 0.6
 -----------
 
