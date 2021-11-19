@@ -1,3 +1,4 @@
+
 const equal = document.getElementById("equal");
 const clear = document.getElementById("clear");
 const erase = document.getElementById("delete");
@@ -5,7 +6,6 @@ let display = document.getElementById("display");
 let lastEntry = document.getElementById("lastEntry");
 let numButton = document.querySelectorAll('[data-number]');
 let opButton = document.querySelectorAll('[data-op]');
-let firstNum = "";
 let secondNum = "";
 let total = null;
 let operator = undefined;
@@ -31,7 +31,7 @@ opButton.forEach((button) => button.addEventListener('click', () =>
 
 //Store num and Operator
 function store(chosen) {
-    if (total === null) {
+    if (total === null || operator === undefined) {
         operator = chosen;
         total = Number(display.innerText);
         lastEntry.innerText = total + " " + operator;
@@ -54,7 +54,13 @@ function store(chosen) {
 
 //Equal Function
 function runOp() {
-    if (running != false) {
+    console.log(operator)
+    if (operator === undefined) {
+        total = Number(display.innerText);
+        lastEntry.innerText = total + " =";
+    }
+    else if (running != false) {
+        lastEntry.innerText = total + " " + operator + " " + secondNum;
         operate(total,operator,secondNum);
     }
     else {
@@ -68,23 +74,35 @@ function runOp() {
 //Main display as numbers are entered.
 function inputNum(entry) {
     if (running != false) {
-        lastEntry.innerText = total;
+        lastEntry.innerText = total + " " + operator;
         display.innerText = entry;
+        display.innerText = display.innerText.substring(0,12);
         running = false;
     }
     else {
         display.innerText += entry;
+        display.innerText = display.innerText.substring(0,12);
     }
 }
 
 //Clear All
 function hardReset() {
-    firstNum = 0;
-    secondNum = 0;
+    secondNum = "";
     total = null;
     operator = undefined;
     display.innerText = "";
     lastEntry.innerText = "";
+    running = false;
+}
+
+//Scientific Notation
+function sciNo(result) {
+    if (result > 999999999999) {
+        return result.toExponential().replace(/e\+?/, ' x 10^');
+    }
+    else {
+        return result;
+    }
 }
 
 //Operators 'N Math Functions
@@ -106,8 +124,7 @@ function mul(num1,num2) {
 function dvd(num1,num2) {
     console.log(num1/num2);
     if (num2 === 0) {
-        alert("Can't divide by 0, broh.");
-        hardReset();
+        display.innerText = "Can't divide by 0.";
     }
     else {
         total = (num1/num2);
@@ -115,22 +132,30 @@ function dvd(num1,num2) {
     }
 }
 function operate(a, oper, b) {
-    console.log(a);
-    console.log(b);
-    console.log(oper);
     running = true;
     switch(oper){
         case "+" :
-            display.innerText = add(a,b);
-            return add(a,b);
+            final = add(a,b);
+            final = sciNo(final);
+            display.innerText = final;
+            return final;
         case "-" :
-            display.innerText = sub(a,b);
-            return sub(a,b);
+            final = sub(a,b);
+            final = sciNo(final);
+            display.innerText = final;
+            return final;
         case "X" :
-            display.innerText = mul(a,b);
-            return mul(a,b);
+            final = mul(a,b);
+            final = sciNo(final);
+            display.innerText = final;
+            return final;
         case "/" :
-            display.innerText = dvd(a,b);
-            return dvd(a,b);   
+            final = dvd(a,b);
+            final = sciNo(final);
+            display.innerText = final;
+            return final; 
     }
 }
+
+
+

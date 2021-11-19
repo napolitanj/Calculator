@@ -3,6 +3,20 @@ Calculator
 This is a project for The Odin Project's foundation course. My intention for the project is to refine and demonstrate my knowledge of HTML, CSS, and Javascript.
 
 -----------
+Version 1.5
+-----------
+
+Updates:
+
+- Error message when dividing by 0.
+- Proper display when adding operators and numbers after pressing "=".
+- Limits length of entry for input.
+- The calculator functions accordingly when "=" is pressed before adding an operator or number, or pressed repeatedly.
+- Fixed bug when adding an operator or number after "=" has been pressed before an operator was chosen.
+- Prevented values in main display from overflowing. Values are now converted to exponents.
+
+
+-----------
 Version 1.0
 -----------
 
