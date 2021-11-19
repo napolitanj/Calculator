@@ -12,7 +12,7 @@ let operator = undefined;
 let running = false;
 
 
-//Event Listeners for all buttons
+//Event listeners for all buttons
 equal.addEventListener("click", ()=> 
     runOp());
 
@@ -20,13 +20,17 @@ clear.addEventListener("click", ()=>
     hardReset());
 
 erase.addEventListener("click", ()=> 
-    display.textContent = display.textContent.slice(0,-1));
+    deleteNum());
 
 numButton.forEach((button) => button.addEventListener('click', () =>
     inputNum(button.textContent)));
 
 opButton.forEach((button) => button.addEventListener('click', () => 
     store(button.textContent)));
+
+
+//Event listeners for keyboard
+window.addEventListener("keydown", keyboard);
 
 
 //Store num and Operator
@@ -73,7 +77,11 @@ function runOp() {
 
 //Main display as numbers are entered.
 function inputNum(entry) {
-    if (running != false) {
+    if (entry === "." && display.innerText.includes(".")) {
+        return;
+    }
+    
+    else if (running != false) {
         lastEntry.innerText = total + " " + operator;
         display.innerText = entry;
         display.innerText = display.innerText.substring(0,12);
@@ -105,26 +113,28 @@ function sciNo(result) {
     }
 }
 
+//Delete
+function deleteNum() {
+    display.textContent = display.textContent.slice(0,-1);
+}
+
 //Operators 'N Math Functions
 function add(num1,num2) {
-    console.log(num1+num2);
     total = (num1+num2);
     return total;
 }
 function sub(num1,num2) {
-    console.log(num1-num2);
     total = (num1-num2);
     return total;
 }
 function mul(num1,num2) {
-    console.log(num1*num2);
     total = (num1*num2);
     return total;
 }
 function dvd(num1,num2) {
-    console.log(num1/num2);
     if (num2 === 0) {
-        display.innerText = "Can't divide by 0.";
+        let msg = display.innerText = "Can't divide by 0, broh.";
+        return msg;
     }
     else {
         total = (num1/num2);
@@ -144,7 +154,7 @@ function operate(a, oper, b) {
             final = sciNo(final);
             display.innerText = final;
             return final;
-        case "X" :
+        case "x" :
             final = mul(a,b);
             final = sciNo(final);
             display.innerText = final;
@@ -153,9 +163,20 @@ function operate(a, oper, b) {
             final = dvd(a,b);
             final = sciNo(final);
             display.innerText = final;
-            return final; 
+            return final;
+        case "*" :
+            final = mul(a,b);
+            final = sciNo(final);
+            display.innerText = final;
+            return final;  
     }
 }
 
-
+function keyboard(k) {
+    if (k.key === "Backspace") deleteNum();
+    if (k.key === "=" || k.key === "Enter") runOp();
+    if (k.key === "Escape" || k.key === "Delete") hardReset();
+    if (k.key >= 0 && k.key <= 9 || k.key === ".") inputNum(k.key);
+    if (k.key === "+" || k.key === "-" || k.key === "x" || k.key === "*" || k.key === "/") store(k.key);
+}
 

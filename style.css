@@ -58,6 +58,7 @@ p {
 .button {
     display:flex;
     text-align:center;
+    font-weight: bold;
     justify-content:center;
     height:20px;
     width:20px;
@@ -74,6 +75,7 @@ p {
     text-align:center;
     justify-content:center;
     height:15px;
+    font-weight: bold;
     width:auto;
     padding: 20px;
     margin:30px;

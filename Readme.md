@@ -3,6 +3,18 @@ Calculator
 This is a project for The Odin Project's foundation course. My intention for the project is to refine and demonstrate my knowledge of HTML, CSS, and Javascript.
 
 -----------
+Version 2.0
+-----------
+
+Updates:
+
+- Keyboard support (added an additional function to accomodate both "x" and "*" for multiplication)
+- Will not add additional "." to numbers.
+
+Am I doing Readme's right?
+
+
+-----------
 Version 1.5
 -----------
 
