@@ -1,3 +1,5 @@
+LIVE DEMO: https://napolitanj.github.io/Calculator/
+
 Calculator
 
 This is a project for The Odin Project's foundation course. My intention for the project is to refine and demonstrate my knowledge of HTML, CSS, and Javascript.
